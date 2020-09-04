@@ -1,6 +1,10 @@
 var letsCookButton = document.querySelector(".lets-cook-button");
 var resultBox = document.querySelector(".result-box");
 var select = document.querySelectorAll('.select');
+var addRecipeButton = document.querySelector('.add-a-recipe-button');
+var customForm = document.querySelector('.custom-form');
+var customText = document.querySelectorAll('.custom-text');
+var addNewButton = document.querySelector('.add-new-button')
 
 var sides = [
   "Miso Glazed Carrots",
@@ -52,6 +56,8 @@ var desserts = [
 
 letsCookButton.addEventListener("click", randomizeDish);
 resultBox.addEventListener("click", restartQuery);
+addRecipeButton.addEventListener("click", promptModal);
+addNewButton.addEventListener("click", addNewRecipe);
 
 function randomizeDish() {
   var randomSideDish = getRandomIndex(sides);
@@ -112,4 +118,25 @@ function restartQuery(event) {
     resultBox.innerHTML = '';
     resultBox.insertAdjacentHTML('afterbegin', cookPotIcon);
   }
+
+}
+function promptModal() {
+  customForm.classList.remove('hidden');
+}
+
+function addNewRecipe() {
+  event.preventDefault();
+  if (customText[0].value === "side" || "Side") {
+    sides.push(customText[1].value);
+  } else if (customText[0].value === "main dish" || "Main Dish" || "main" || "Main") {
+    mains.push(customText[1].value);
+  } else if (customText[0].value === "dessert" || "Dessert") {
+    desserts.push(customText[1].value)
+  }
+  clearForm();
+}
+
+function clearForm() {
+  customText[0].value = '';
+  customText[1].value = '';
 }

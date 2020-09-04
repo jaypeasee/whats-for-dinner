@@ -1,5 +1,5 @@
-var letsCookButton = document.querySelector(".lets-cook-button");
-var resultBox = document.querySelector(".result-box");
+var letsCookButton = document.querySelector('.lets-cook-button');
+var resultBox = document.querySelector('.result-box');
 var select = document.querySelectorAll('.select');
 var addRecipeButton = document.querySelector('.add-a-recipe-button');
 var customForm = document.querySelector('.custom-form');
@@ -54,10 +54,10 @@ var desserts = [
   "Eclairs"
 ];
 
-letsCookButton.addEventListener("click", randomizeDish);
-resultBox.addEventListener("click", restartQuery);
-addRecipeButton.addEventListener("click", promptModal);
-addNewButton.addEventListener("click", addNewRecipe);
+letsCookButton.addEventListener('click', randomizeDish);
+resultBox.addEventListener('click', restartQuery);
+addRecipeButton.addEventListener('click', promptModal);
+addNewButton.addEventListener('click', addNewRecipe);
 
 function randomizeDish() {
   var randomSideDish = getRandomIndex(sides);
@@ -72,9 +72,7 @@ function randomizeDish() {
   } else if (select[3].checked) {
     displayMeal(randomSideDish, randomMainDish, randomDessert);
   }
-  for (var i = 0; i < select.length; i++) {
-    select[i].checked = false;
-  }
+  clearRadios();
 }
 
 function getRandomIndex(array) {
@@ -95,6 +93,12 @@ function displayDish(dish) {
     </div>
   </div>`
   resultBox.insertAdjacentHTML('afterbegin', singleDishBlock);
+}
+
+function clearRadios() {
+  for (var i = 0; i < select.length; i++) {
+    select[i].checked = false;
+  }
 }
 
 function displayMeal(main, side, dessert) {
@@ -126,12 +130,15 @@ function promptModal() {
 
 function addNewRecipe() {
   event.preventDefault();
-  if (customText[0].value === "side" || "Side") {
+  customText[0].value = customText[0].value.toLowerCase();
+  if (customText[0].value === 'side') {
     sides.push(customText[1].value);
-  } else if (customText[0].value === "main dish" || "Main Dish" || "main" || "Main") {
+  } else if (customText[0].value === 'main dish') {
     mains.push(customText[1].value);
-  } else if (customText[0].value === "dessert" || "Dessert") {
-    desserts.push(customText[1].value)
+  } else if (customText[0].value === 'dessert') {
+    desserts.push(customText[1].value);
+  } else {
+    showError();
   }
   clearForm();
 }
@@ -139,4 +146,10 @@ function addNewRecipe() {
 function clearForm() {
   customText[0].value = '';
   customText[1].value = '';
+}
+
+function showError() {
+  var errorMessage =
+  `<p class=error-message>Fill out both fields with a valid Recipe Type</p>`
+  customForm.insertAdjacentHTML('beforeend', errorMessage);
 }

@@ -69,6 +69,7 @@ form {
   bottom: 0;
   width: 100%;
   display: flex;
+  justify-content: flex-start;
   background-color: rgba(225, 225, 225, .9);
   align-self: flex-end;
 }
@@ -166,15 +167,21 @@ form {
 }
 
 .add-new-button {
-  margin-left: 50px;
   height: 35px;
   margin-top: 12px;
   background-color: #0fb9b1;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
 }
 
 .dish-info {
   display: flex;
   flex-direction: column;
+}
+
+.error-message {
+  color: #ee5253;
+  margin-top: 20px;
 }
 
 .hidden {

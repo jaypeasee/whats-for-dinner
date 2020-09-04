@@ -12,6 +12,16 @@ h1, h2, p, button {
   font-family: 'Roboto', sans-serif;
 }
 
+h1 {
+  font-size: 2em;
+  margin: 0;
+}
+
+h4 {
+  font-size: 1.5em;
+  margin: 0;
+}
+
 .required {
   color: #ee5253;
 }
@@ -109,17 +119,31 @@ form {
   margin-bottom: 5px;
 }
 
-.result {
+.result-box {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.cookpot {
+.cook-pot-icon {
   height: 150px;
   width: 150px;
 }
 
+.dish-block {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 80%;
+}
+
+.clear-div {
+  display: flex;
+  justify-content: flex-end;
+}
 
 .clear-button {
   background-color: #95a5a6;
@@ -128,8 +152,6 @@ form {
   padding-right: 20px;
   padding-left: 20px;
   color: white;
-  align-self: flex-end;
-  margin-left: 80%;
 }
 
 .new-recipe {
@@ -148,6 +170,11 @@ form {
   height: 35px;
   margin-top: 12px;
   background-color: #0fb9b1;
+}
+
+.dish-info {
+  display: flex;
+  flex-direction: column;
 }
 
 .hidden {

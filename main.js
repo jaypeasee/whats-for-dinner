@@ -130,6 +130,9 @@ function promptModal() {
 
 function addNewRecipe() {
   event.preventDefault();
+  if (customForm.children[3]) {
+    customForm.children[3].remove()
+  }
   customText[0].value = customText[0].value.toLowerCase();
   if (customText[0].value === 'side') {
     sides.push(customText[1].value);

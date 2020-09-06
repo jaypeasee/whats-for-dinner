@@ -57,7 +57,7 @@ var desserts = [
 letsCookButton.addEventListener('click', randomizeDish);
 resultBox.addEventListener('click', restartQuery);
 addRecipeButton.addEventListener('click', promptModal);
-addNewButton.addEventListener('click', addNewRecipe);
+addNewButton.addEventListener('click', handleForm);
 
 function randomizeDish() {
   var randomSideDish = getRandomIndex(sides);
@@ -128,12 +128,16 @@ function promptModal() {
   customForm.classList.remove('hidden');
 }
 
-function addNewRecipe() {
+function handleForm() {
   event.preventDefault();
+  customText[0].value = customText[0].value.toLowerCase();
   if (customForm.children[3]) {
     customForm.children[3].remove()
   }
-  customText[0].value = customText[0].value.toLowerCase();
+  addNewRecipe();
+  }
+
+function addNewRecipe() {
   if (customText[0].value === 'side') {
     sides.push(customText[1].value);
   } else if (customText[0].value === 'main dish') {
@@ -146,13 +150,13 @@ function addNewRecipe() {
   clearForm();
 }
 
-function clearForm() {
-  customText[0].value = '';
-  customText[1].value = '';
-}
-
 function showError() {
   var errorMessage =
   `<p class=error-message>Fill out both fields with a valid Recipe Type</p>`
   customForm.insertAdjacentHTML('beforeend', errorMessage);
+}
+
+function clearForm() {
+  customText[0].value = '';
+  customText[1].value = '';
 }

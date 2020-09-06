@@ -138,11 +138,11 @@ function handleForm() {
   }
 
 function addNewRecipe() {
-  if (customText[0].value === 'side') {
+  if (customText[0].value === 'side' && customText[1].value) {
     sides.push(customText[1].value);
-  } else if (customText[0].value === 'main dish') {
+  } else if (customText[0].value === 'main dish' && customText[1].value) {
     mains.push(customText[1].value);
-  } else if (customText[0].value === 'dessert') {
+  } else if (customText[0].value === 'dessert' && customText[1].value) {
     desserts.push(customText[1].value);
   } else {
     showError();

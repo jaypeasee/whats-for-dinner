@@ -1,6 +1,10 @@
-var letsCookButton = document.querySelector(".lets-cook-button");
-var resultBox = document.querySelector(".result-box");
+var letsCookButton = document.querySelector('.lets-cook-button');
+var resultBox = document.querySelector('.result-box');
 var select = document.querySelectorAll('.select');
+var addRecipeButton = document.querySelector('.add-a-recipe-button');
+var customForm = document.querySelector('.custom-form');
+var customText = document.querySelectorAll('.custom-text');
+var addNewButton = document.querySelector('.add-new-button')
 
 var sides = [
   "Miso Glazed Carrots",
@@ -50,8 +54,10 @@ var desserts = [
   "Eclairs"
 ];
 
-letsCookButton.addEventListener("click", randomizeDish);
-resultBox.addEventListener("click", restartQuery);
+letsCookButton.addEventListener('click', randomizeDish);
+resultBox.addEventListener('click', restartQuery);
+addRecipeButton.addEventListener('click', promptModal);
+addNewButton.addEventListener('click', handleForm);
 
 function randomizeDish() {
   var randomSideDish = getRandomIndex(sides);
@@ -66,9 +72,7 @@ function randomizeDish() {
   } else if (select[3].checked) {
     displayMeal(randomSideDish, randomMainDish, randomDessert);
   }
-  for (var i = 0; i < select.length; i++) {
-    select[i].checked = false;
-  }
+  clearRadios();
 }
 
 function getRandomIndex(array) {
@@ -89,6 +93,12 @@ function displayDish(dish) {
     </div>
   </div>`
   resultBox.insertAdjacentHTML('afterbegin', singleDishBlock);
+}
+
+function clearRadios() {
+  for (var i = 0; i < select.length; i++) {
+    select[i].checked = false;
+  }
 }
 
 function displayMeal(main, side, dessert) {
@@ -112,4 +122,41 @@ function restartQuery(event) {
     resultBox.innerHTML = '';
     resultBox.insertAdjacentHTML('afterbegin', cookPotIcon);
   }
+
+}
+function promptModal() {
+  customForm.classList.remove('hidden');
+}
+
+function handleForm() {
+  event.preventDefault();
+  customText[0].value = customText[0].value.toLowerCase();
+  if (customForm.children[3]) {
+    customForm.children[3].remove()
+  }
+  addNewRecipe();
+  }
+
+function addNewRecipe() {
+  if (customText[0].value === 'side' && customText[1].value) {
+    sides.push(customText[1].value);
+  } else if (customText[0].value === 'main dish' && customText[1].value) {
+    mains.push(customText[1].value);
+  } else if (customText[0].value === 'dessert' && customText[1].value) {
+    desserts.push(customText[1].value);
+  } else {
+    showError();
+  }
+  clearForm();
+}
+
+function showError() {
+  var errorMessage =
+  `<p class=error-message>Fill out both fields with a valid Recipe Type</p>`
+  customForm.insertAdjacentHTML('beforeend', errorMessage);
+}
+
+function clearForm() {
+  customText[0].value = '';
+  customText[1].value = '';
 }
